@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy &middot; Read Later</title>
+    <meta name="description" content="Privacy policy for the Read Later app — explains what data the app stores, where it lives, and how it is used.">
+    <style>
+        :root {
+            --brand-start: #ff8a4c;
+            --brand-end: #ec407a;
+            --text: #1a1a1a;
+            --text-muted: #5a5a5a;
+            --bg: #fbfbfd;
+            --rule: #e6e6ec;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text: #f2f2f5;
+                --text-muted: #b0b0b8;
+                --bg: #131316;
+                --rule: #2a2a30;
+            }
+        }
+        * { box-sizing: border-box; }
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .banner {
+            height: 6px;
+            background: linear-gradient(135deg, var(--brand-start), var(--brand-end));
+        }
+        main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 48px 24px 96px;
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 0 8px;
+            letter-spacing: -0.01em;
+        }
+        .updated {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin: 0 0 32px;
+        }
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 40px 0 12px;
+            letter-spacing: -0.005em;
+        }
+        p, ul, ol { margin: 0 0 16px; }
+        ul, ol { padding-left: 24px; }
+        li { margin-bottom: 6px; }
+        a {
+            color: var(--brand-end);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(236, 64, 122, 0.4);
+        }
+        a:hover { border-bottom-color: var(--brand-end); }
+        strong { font-weight: 600; }
+        hr {
+            border: 0;
+            border-top: 1px solid var(--rule);
+            margin: 40px 0;
+        }
+        footer {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-top: 56px;
+            padding-top: 24px;
+            border-top: 1px solid var(--rule);
+        }
+        code, .mono {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+            font-size: 0.92em;
+            background: var(--rule);
+            padding: 1px 6px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner" aria-hidden="true"></div>
+    <main>
+        <h1>Privacy Policy for Read Later</h1>
+        <p class="updated">Last updated: June 4, 2026</p>
+
+        <p>
+            Read Later (&ldquo;the app&rdquo;) is designed to respect your privacy.
+            This document explains what data the app handles, where it is stored,
+            and how it is used.
+        </p>
+
+        <h2>Summary</h2>
+        <p>
+            Read Later does not collect personal information about you. The only
+            data it stores is the URLs and page titles you explicitly choose to
+            save. That data lives in your own iCloud account and on your own
+            devices. It is never sent to the developer, never sold, and never
+            shared with any third party.
+        </p>
+
+        <h2>Data the app stores</h2>
+        <p>When you save a page, the app stores:</p>
+        <ul>
+            <li>The URL of the page</li>
+            <li>The title of the page (typically the <code>&lt;title&gt;</code> of the HTML document)</li>
+            <li>A timestamp for when you saved it</li>
+            <li>A timestamp for when you last changed it</li>
+            <li>A read/unread flag</li>
+        </ul>
+        <p>
+            That is the entirety of what is stored. The app does <strong>not</strong>
+            collect or transmit:
+        </p>
+        <ul>
+            <li>Your name, email address, or any account information</li>
+            <li>Device identifiers, advertising identifiers, or IP addresses</li>
+            <li>Your browsing history outside the pages you choose to save</li>
+            <li>Location data</li>
+            <li>Analytics, telemetry, or crash reports of any kind</li>
+            <li>Contacts, calendar, photos, or any other on-device data</li>
+        </ul>
+
+        <h2>Where the data is stored</h2>
+        <p>Saved items are stored in two places, both private to you:</p>
+        <ol>
+            <li>
+                <strong>Your iCloud Key-Value Store</strong>, so the same list
+                appears on every Apple device signed into the same iCloud account.
+                This is provided by Apple&rsquo;s <code>NSUbiquitousKeyValueStore</code>
+                API and is governed by Apple&rsquo;s privacy policy and your iCloud
+                settings.
+            </li>
+            <li>
+                <strong>A local container on each device</strong> (an App Group
+                container) so the Safari extension and Share extension can read
+                and write to the list without re-fetching it from iCloud.
+            </li>
+        </ol>
+        <p>
+            The developer has no servers and no access to your data. The only
+            network calls the app makes are to Apple&rsquo;s iCloud service to
+            sync between your own devices.
+        </p>
+
+        <h2>Companion apps</h2>
+        <p>
+            A companion Mac app and an optional Chromium browser extension
+            (for Dia, Chrome, Edge, Arc, Brave, etc.) are available separately.
+            Both are designed to operate on the same saved list:
+        </p>
+        <ul>
+            <li>The Mac app reads and writes the same iCloud-backed list described above.</li>
+            <li>
+                The Mac app exposes a small HTTP server on
+                <code>localhost:57832</code> so that the browser extension running
+                on the same Mac can keep its copy of the list in sync. This server
+                is only reachable from the same Mac and accepts no connections
+                from outside the device.
+            </li>
+            <li>
+                The browser extension stores the same fields (URL, title,
+                timestamps, read flag) using the browser&rsquo;s local extension
+                storage.
+            </li>
+        </ul>
+        <p>Neither companion ever contacts a remote server.</p>
+
+        <h2>Permissions the iOS app requests</h2>
+        <ul>
+            <li>
+                <strong>iCloud Key-Value Storage</strong> &mdash; to sync your
+                saved list across your own Apple devices.
+            </li>
+            <li>
+                <strong>Share Extension activation</strong> &mdash; when you choose
+                Read Later from the iOS share sheet, the extension reads the URL
+                being shared so it can save it. It does not read anything else.
+            </li>
+            <li>
+                <strong>Safari Web Extension permissions</strong> &mdash; when
+                enabled in Safari, the extension reads the URL and title of the
+                page you are currently looking at, but only when you tap its
+                toolbar icon.
+            </li>
+            <li>
+                <strong>Siri / Shortcuts intent</strong> &mdash; when you invoke
+                &ldquo;Save to Read Later&rdquo; via Siri or Shortcuts, the URL
+                you provide is saved.
+            </li>
+        </ul>
+
+        <h2>Third parties</h2>
+        <p>
+            Read Later does not use any third-party analytics, advertising,
+            crash-reporting, attribution, or tracking SDKs. There are no third
+            parties with access to your data.
+        </p>
+
+        <h2>Your control over your data</h2>
+        <p>
+            Because your data is stored in your own iCloud and on your own
+            devices, you control it completely:
+        </p>
+        <ul>
+            <li>Delete an individual saved item from within the app at any time.</li>
+            <li>Uninstall the app, which removes all locally stored data on that device.</li>
+            <li>
+                Remove the app&rsquo;s iCloud data via
+                <strong>Settings &rarr; [your name] &rarr; iCloud &rarr; Manage
+                Account Storage &rarr; Read Later &rarr; Delete Data</strong>.
+            </li>
+        </ul>
+
+        <h2>Children&rsquo;s privacy</h2>
+        <p>
+            The app is not directed to children under 13 and does not knowingly
+            collect any personal information from anyone, regardless of age.
+        </p>
+
+        <h2>Changes to this policy</h2>
+        <p>
+            If this policy changes in a meaningful way, the updated version will
+            be posted at this URL and the &ldquo;Last updated&rdquo; date at the
+            top will be revised.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+            Questions or concerns about this privacy policy:
+            <a href="mailto:shearm@mac.com">shearm@mac.com</a>
+        </p>
+
+        <footer>
+            &copy; 2026 Read Later. All rights reserved.
+        </footer>
+    </main>
+</body>
+</html>
