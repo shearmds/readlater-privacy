@@ -94,7 +94,7 @@
     <div class="banner" aria-hidden="true"></div>
     <main>
         <h1>Privacy Policy for Read Later</h1>
-        <p class="updated">Last updated: June 4, 2026</p>
+        <p class="updated">Last updated: June 12, 2026</p>
 
         <p>
             Read Later (&ldquo;the app&rdquo;) is designed to respect your privacy.
@@ -106,9 +106,11 @@
         <p>
             Read Later does not collect personal information about you. The only
             data it stores is the URLs and page titles you explicitly choose to
-            save. That data lives in your own iCloud account and on your own
-            devices. It is never sent to the developer, never sold, and never
-            shared with any third party.
+            save, along with read/unread status and timestamps. That data is
+            stored on your own devices and synced between them via a small
+            cloud relay operated by the developer, solely so your saved list
+            stays up to date across your iPhone, iPad, and browser. It is never
+            sold, and never shared with any third party.
         </p>
 
         <h2>Data the app stores</h2>
@@ -119,6 +121,7 @@
             <li>A timestamp for when you saved it</li>
             <li>A timestamp for when you last changed it</li>
             <li>A read/unread flag</li>
+            <li>A flag marking whether you've deleted it, so the deletion can sync to your other devices</li>
         </ul>
         <p>
             That is the entirety of what is stored. The app does <strong>not</strong>
@@ -134,55 +137,42 @@
         </ul>
 
         <h2>Where the data is stored</h2>
-        <p>Saved items are stored in two places, both private to you:</p>
+        <p>Saved items are stored in two places:</p>
         <ol>
             <li>
-                <strong>Your iCloud Key-Value Store</strong>, so the same list
-                appears on every Apple device signed into the same iCloud account.
-                This is provided by Apple&rsquo;s <code>NSUbiquitousKeyValueStore</code>
-                API and is governed by Apple&rsquo;s privacy policy and your iCloud
-                settings.
+                <strong>A local container on each device</strong> (an App Group
+                container on iOS, or the browser&rsquo;s local extension storage)
+                so the app and any browser extension can read and write to the
+                list immediately, even offline.
             </li>
             <li>
-                <strong>A local container on each device</strong> (an App Group
-                container) so the Safari extension and Share extension can read
-                and write to the list without re-fetching it from iCloud.
+                <strong>A cloud sync store</strong>, hosted on Cloudflare Workers
+                and operated by the developer, used solely to relay your saved
+                list between your own devices. Access to this store requires a
+                private key built into the app and extension; the developer does
+                not separately access, read, or analyze the contents.
             </li>
         </ol>
         <p>
-            The developer has no servers and no access to your data. The only
-            network calls the app makes are to Apple&rsquo;s iCloud service to
-            sync between your own devices.
+            The only network calls the app and extension make are to this cloud
+            sync service, to push and pull your own saved list.
         </p>
 
-        <h2>Companion apps</h2>
+        <h2>Browser extension</h2>
         <p>
-            A companion Mac app and an optional Chromium browser extension
-            (for Dia, Chrome, Edge, Arc, Brave, etc.) are available separately.
-            Both are designed to operate on the same saved list:
+            An optional Chromium browser extension (for Dia, Chrome, Edge, Arc,
+            Brave, etc.) is available separately. It stores the same fields
+            (URL, title, timestamps, read flag, deleted flag) using the
+            browser&rsquo;s local extension storage, and syncs them with the
+            same cloud sync service described above.
         </p>
-        <ul>
-            <li>The Mac app reads and writes the same iCloud-backed list described above.</li>
-            <li>
-                The Mac app exposes a small HTTP server on
-                <code>localhost:57832</code> so that the browser extension running
-                on the same Mac can keep its copy of the list in sync. This server
-                is only reachable from the same Mac and accepts no connections
-                from outside the device.
-            </li>
-            <li>
-                The browser extension stores the same fields (URL, title,
-                timestamps, read flag) using the browser&rsquo;s local extension
-                storage.
-            </li>
-        </ul>
-        <p>Neither companion ever contacts a remote server.</p>
 
         <h2>Permissions the iOS app requests</h2>
         <ul>
             <li>
-                <strong>iCloud Key-Value Storage</strong> &mdash; to sync your
-                saved list across your own Apple devices.
+                <strong>Network access</strong> &mdash; to sync your saved list
+                with the cloud sync service described above, across your own
+                devices.
             </li>
             <li>
                 <strong>Share Extension activation</strong> &mdash; when you choose
@@ -211,16 +201,14 @@
 
         <h2>Your control over your data</h2>
         <p>
-            Because your data is stored in your own iCloud and on your own
-            devices, you control it completely:
+            You control your saved list completely:
         </p>
         <ul>
-            <li>Delete an individual saved item from within the app at any time.</li>
+            <li>Delete an individual saved item from within the app or extension at any time &mdash; the deletion syncs to your other devices.</li>
             <li>Uninstall the app, which removes all locally stored data on that device.</li>
             <li>
-                Remove the app&rsquo;s iCloud data via
-                <strong>Settings &rarr; [your name] &rarr; iCloud &rarr; Manage
-                Account Storage &rarr; Read Later &rarr; Delete Data</strong>.
+                To request removal of your data from the cloud sync store,
+                contact the developer at the email address below.
             </li>
         </ul>
 
