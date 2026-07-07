@@ -94,7 +94,7 @@
     <div class="banner" aria-hidden="true"></div>
     <main>
         <h1>Privacy Policy for Research Sync</h1>
-        <p class="updated">Last updated: June 20, 2026</p>
+        <p class="updated">Last updated: July 7, 2026</p>
 
         <p>
             Research Sync (&ldquo;the app&rdquo;) is designed to respect your privacy.
@@ -104,13 +104,17 @@
 
         <h2>Summary</h2>
         <p>
-            Research Sync does not collect personal information about you. The only
+            Research Sync does not collect personal information about you. The
             data it stores is the URLs and page titles you explicitly choose to
-            save, along with read/unread status and timestamps. That data is
-            stored on your own devices and synced between them via a small
-            cloud relay operated by the developer, solely so your saved list
-            stays up to date across your iPhone, iPad, and browser. It is never
-            sold, and never shared with any third party.
+            save, along with read/unread status and timestamps, plus &mdash; for
+            articles you save for offline reading &mdash; the readable text of
+            those articles. That data is stored on your own devices and synced
+            between them via a small cloud relay operated by the developer,
+            solely so your saved list stays up to date across your iPhone, iPad,
+            and browser. Offline article text is <strong>end-to-end encrypted on
+            your device</strong> before it is synced, so the cloud relay only
+            ever holds unreadable ciphertext. Your data is never sold, and never
+            shared with any third party.
         </p>
 
         <h2>Data the app stores</h2>
@@ -123,6 +127,14 @@
             <li>A read/unread flag</li>
             <li>A flag marking whether you've deleted it, so the deletion can sync to your other devices</li>
             <li>Any optional notes / context that you add to the notes field for a URL</li>
+            <li>
+                For any article you save for <strong>offline reading</strong>: the
+                readable text of that article (extracted from the page and
+                cleaned up for reading), so it stays available without a network
+                connection. This text is kept in a local on-device cache, and
+                &mdash; if synced &mdash; is end-to-end encrypted on your device
+                before upload, so the cloud relay only stores ciphertext.
+            </li>
         </ul>
         <p>
             That is the entirety of what is stored. The app does <strong>not</strong>
@@ -144,14 +156,20 @@
                 <strong>A local container on each device</strong> (an App Group
                 container on iOS, or the browser&rsquo;s local extension storage)
                 so the app and any browser extension can read and write to the
-                list immediately, even offline.
+                list immediately, even offline. The readable text of articles you
+                save for offline reading is kept in a separate on-device cache on
+                the same device.
             </li>
             <li>
                 <strong>A cloud sync store</strong>, hosted on Cloudflare Workers
                 and operated by the developer, used solely to relay your saved
-                list between your own devices. Access to this store requires a
-                private key built into the app and extension; the developer does
-                not separately access, read, or analyze the contents.
+                list &mdash; and the encrypted text of your offline articles &mdash;
+                between your own devices. Access requires a private sync key
+                that is generated on your device; the same key is also used to
+                <strong>end-to-end encrypt</strong> the text of offline articles
+                before it is uploaded, so the store holds only ciphertext for
+                that content. The developer does not separately access, read, or
+                analyze your data.
             </li>
         </ol>
         <p>
@@ -165,7 +183,12 @@
             Brave, etc.) is available separately. It stores the same fields
             (URL, title, timestamps, read flag, deleted flag, notes) using the
             browser&rsquo;s local extension storage, and syncs them with the
-            same cloud sync service described above.
+            same cloud sync service described above. When you save an article
+            for <strong>offline reading</strong>, the extension reads the
+            content of that page &mdash; only at the moment you choose to save
+            it &mdash; using bundled, on-device reader libraries, to extract the
+            article text for the offline copy. It does not read or monitor pages
+            you have not chosen to save, and it does no background browsing.
         </p>
 
         <h2>Permissions the iOS app requests</h2>
