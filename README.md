@@ -1,2 +1,2 @@
 # readlater-privacy
-Privacy policy for Read Later
+Privacy policy for Research Sync
