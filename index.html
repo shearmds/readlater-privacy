@@ -94,7 +94,7 @@
     <div class="banner" aria-hidden="true"></div>
     <main>
         <h1>Privacy Policy for Research Sync</h1>
-        <p class="updated">Last updated: July 7, 2026</p>
+        <p class="updated">Last updated: July 9, 2026</p>
 
         <p>
             Research Sync (&ldquo;the app&rdquo;) is designed to respect your privacy.
@@ -113,8 +113,14 @@
             solely so your saved list stays up to date across your iPhone, iPad,
             and browser. Offline article text is <strong>end-to-end encrypted on
             your device</strong> before it is synced, so the cloud relay only
-            ever holds unreadable ciphertext. Your data is never sold, and never
-            shared with any third party.
+            ever holds unreadable ciphertext, and it is never shared with anyone.
+            To sort your saved links into folders automatically, the
+            <strong>title and URL</strong> of a saved link &mdash; never the
+            article text, and no information about you &mdash; are sent to
+            Google&rsquo;s Gemini API to suggest a folder name. That is the only
+            third party involved, it is used solely to categorize your links, and
+            under Google&rsquo;s paid API terms this data is not used to train
+            Google&rsquo;s models. Your data is never sold.
         </p>
 
         <h2>Data the app stores</h2>
@@ -127,6 +133,7 @@
             <li>A read/unread flag</li>
             <li>A flag marking whether you've deleted it, so the deletion can sync to your other devices</li>
             <li>Any optional notes / context that you add to the notes field for a URL</li>
+            <li>A short folder name used to group the item, suggested automatically (see &ldquo;AI folder organization&rdquo; below)</li>
             <li>
                 For any article you save for <strong>offline reading</strong>: the
                 readable text of that article (extracted from the page and
@@ -162,20 +169,62 @@
             </li>
             <li>
                 <strong>A cloud sync store</strong>, hosted on Cloudflare Workers
-                and operated by the developer, used solely to relay your saved
+                and operated by the developer, used to relay your saved
                 list &mdash; and the encrypted text of your offline articles &mdash;
-                between your own devices. Access requires a private sync key
-                that is generated on your device; the same key is also used to
-                <strong>end-to-end encrypt</strong> the text of offline articles
-                before it is uploaded, so the store holds only ciphertext for
-                that content. The developer does not separately access, read, or
+                between your own devices, and to request folder suggestions as
+                described under &ldquo;AI folder organization&rdquo; below. Access
+                requires a private sync key that is generated on your device; the
+                same key is also used to <strong>end-to-end encrypt</strong> the
+                text of offline articles before it is uploaded, so the store holds
+                only ciphertext for that content. Aside from the automated folder
+                categorization, the developer does not separately access, read, or
                 analyze your data.
             </li>
         </ol>
         <p>
             The only network calls the app and extension make are to this cloud
-            sync service, to push and pull your own saved list.
+            sync service, to push and pull your own saved list. The sync service
+            in turn forwards the title and URL of saved links to Google&rsquo;s
+            Gemini API for folder categorization, as described under &ldquo;AI
+            folder organization&rdquo; below; the app and extension never contact
+            Google directly, and the article text of offline saves is never sent.
         </p>
+
+        <h2>AI folder organization</h2>
+        <p>
+            To keep your saved list tidy, the app can automatically sort saved
+            links into folders (such as &ldquo;Tech,&rdquo; &ldquo;Recipes,&rdquo;
+            or &ldquo;News&rdquo;). This works as follows:
+        </p>
+        <ul>
+            <li>
+                The cloud sync service sends the <strong>title and URL</strong>
+                of links that do not yet have a folder to
+                <strong>Google&rsquo;s Gemini API</strong>, which suggests a short
+                folder name for each. The suggested name syncs back to your
+                devices like any other field.
+            </li>
+            <li>
+                <strong>Only the title and URL are sent.</strong> The readable
+                text of your offline articles is never sent to Google &mdash; it
+                stays end-to-end encrypted and is never transmitted in a form
+                anyone but you can read. No account information, device
+                identifiers, or information about you is sent, because the app
+                does not hold any.
+            </li>
+            <li>
+                Google acts only as a processor for this categorization. Under
+                the terms of Google&rsquo;s <strong>paid</strong> Gemini API, the
+                data sent is <strong>not used to train Google&rsquo;s models</strong>
+                and is not used for advertising.
+            </li>
+            <li>
+                Folders are only ever suggested for links that do not already
+                have one; the feature never re-reads or re-categorizes links you
+                have already filed, and a folder you set yourself is never
+                overwritten.
+            </li>
+        </ul>
 
         <h2>Browser extension</h2>
         <p>
@@ -219,8 +268,18 @@
         <h2>Third parties</h2>
         <p>
             Research Sync does not use any third-party analytics, advertising,
-            crash-reporting, attribution, or tracking SDKs. There are no third
-            parties with access to your data.
+            crash-reporting, attribution, or tracking SDKs.
+        </p>
+        <p>
+            The one third party involved is <strong>Google</strong>, whose
+            Gemini API is used solely to suggest folder names from the title and
+            URL of your saved links, as described under &ldquo;AI folder
+            organization&rdquo; above. This is the only case in which any of your
+            data is shared with a third party, it is limited to titles and URLs
+            (never article text or any information about you), and under
+            Google&rsquo;s paid API terms it is not used to train Google&rsquo;s
+            models or for advertising. No other third party has access to your
+            data.
         </p>
 
         <h2>Your control over your data</h2>
