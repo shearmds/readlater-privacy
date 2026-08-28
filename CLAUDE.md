@@ -1,6 +1,6 @@
 # readlater-privacy
 
-The privacy policy for Research Sync. One hand-written `index.html`, no build step. Repo:
+The privacy policy for Clipfile. One hand-written `index.html`, no build step. Repo:
 `github.com/shearmds/readlater-privacy`.
 
 **Treat this as a published legal document, not a web page.** It is what the App Store listing

@@ -1,2 +1,2 @@
 # readlater-privacy
-Privacy policy for Research Sync
+Privacy policy for Clipfile
