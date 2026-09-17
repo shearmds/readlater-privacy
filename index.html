@@ -111,9 +111,15 @@
             those articles. That data is stored on your own devices and synced
             between them via a small cloud relay operated by the developer,
             solely so your saved list stays up to date across your iPhone, iPad,
-            and browser. Offline article text is <strong>end-to-end encrypted on
-            your device</strong> before it is synced, so the cloud relay only
-            ever holds unreadable ciphertext, and it is never shared with anyone.
+            and browser. Offline article text is <strong>encrypted on your
+            device</strong> before it is synced, so the cloud relay stores it
+            only as ciphertext, and it is never shared with anyone. Because that
+            encryption key is derived from the same sync key that authenticates
+            you to the relay, the relay does receive the key; it never decrypts
+            your articles and never stores them in readable form, but it is
+            capable of doing so. See &ldquo;How your data is stored&rdquo; below.
+            Your saved titles and URLs are stored without encryption, because
+            the relay reads them to suggest folder names.
             To sort your saved links into folders automatically, the
             <strong>title and URL</strong> of a saved link &mdash; never the
             article text, and no information about you &mdash; are sent to
@@ -139,8 +145,8 @@
                 readable text of that article (extracted from the page and
                 cleaned up for reading), so it stays available without a network
                 connection. This text is kept in a local on-device cache, and
-                &mdash; if synced &mdash; is end-to-end encrypted on your device
-                before upload, so the cloud relay only stores ciphertext.
+                &mdash; if synced &mdash; is encrypted on your device before
+                upload, so the cloud relay stores it only as ciphertext.
             </li>
         </ul>
         <p>
@@ -173,12 +179,20 @@
                 list &mdash; and the encrypted text of your offline articles &mdash;
                 between your own devices, and to request folder suggestions as
                 described under &ldquo;AI folder organization&rdquo; below. Access
-                requires a private sync key that is generated on your device; the
-                same key is also used to <strong>end-to-end encrypt</strong> the
-                text of offline articles before it is uploaded, so the store holds
-                only ciphertext for that content. Aside from the automated folder
-                categorization, the developer does not separately access, read, or
-                analyze your data.
+                requires a private sync key that is generated on your device, and
+                the key that <strong>encrypts</strong> the text of offline
+                articles is derived from that same sync key. The store therefore
+                holds only ciphertext for article text &mdash; but because the
+                sync key is sent with every request, the relay necessarily
+                receives the material the key is derived from. It does not
+                decrypt anything and does not retain anything in readable form,
+                and no article text is logged. <strong>It is, however, technically
+                able to</strong>, which is why this is described as encryption at rest with a
+                key the relay handles rather than as end-to-end encryption. Your
+                saved titles and URLs are held unencrypted, because the relay
+                reads them to request folder suggestions. Aside from that
+                automated categorization, the developer does not separately
+                access, read, or analyze your data.
             </li>
         </ol>
         <p>
@@ -207,8 +221,8 @@
             <li>
                 <strong>Only the title and URL are sent.</strong> The readable
                 text of your offline articles is never sent to Google &mdash; it
-                stays end-to-end encrypted and is never transmitted in a form
-                anyone but you can read. No account information, device
+                is encrypted before it leaves your device and is never
+                transmitted to any third party in readable form. No account information, device
                 identifiers, or information about you is sent, because the app
                 does not hold any.
             </li>
