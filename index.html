@@ -94,7 +94,7 @@
     <div class="banner" aria-hidden="true"></div>
     <main>
         <h1>Privacy Policy for Clipfile</h1>
-        <p class="updated">Last updated: July 9, 2026</p>
+        <p class="updated">Last updated: September 23, 2026</p>
 
         <p>
             Clipfile (&ldquo;the app&rdquo;) is designed to respect your privacy.
@@ -111,7 +111,7 @@
             those articles. That data is stored on your own devices and synced
             between them via a small cloud relay operated by the developer,
             solely so your saved list stays up to date across your iPhone, iPad,
-            and browser. Offline article text is <strong>encrypted on your
+            and Mac. Offline article text is <strong>encrypted on your
             device</strong> before it is synced, so the cloud relay stores it
             only as ciphertext, and it is never shared with anyone. Because that
             encryption key is derived from the same sync key that authenticates
@@ -124,7 +124,7 @@
             <strong>title and URL</strong> of a saved link &mdash; never the
             article text, and no information about you &mdash; are sent to
             Google&rsquo;s Gemini API to suggest a folder name. That is the only
-            third party involved, it is used solely to categorize your links, and
+            third party that receives any of your data, it is used solely to categorize your links, and
             under Google&rsquo;s paid API terms this data is not used to train
             Google&rsquo;s models. Your data is never sold.
         </p>
@@ -155,7 +155,10 @@
         </p>
         <ul>
             <li>Your name, email address, or any account information</li>
-            <li>Device identifiers, advertising identifiers, or IP addresses</li>
+            <li>Device identifiers or advertising identifiers</li>
+            <li>IP addresses (any server you connect to necessarily sees yours; the
+                relay does not record it, except briefly to limit pairing-code
+                guesses, as described under &ldquo;Linking your devices&rdquo;)</li>
             <li>Your browsing history outside the pages you choose to save</li>
             <li>Location data</li>
             <li>Analytics, telemetry, or crash reports of any kind</li>
@@ -166,10 +169,11 @@
         <p>Saved items are stored in two places:</p>
         <ol>
             <li>
-                <strong>A local container on each device</strong> (an App Group
-                container on iOS, or the browser&rsquo;s local extension storage)
-                so the app and any browser extension can read and write to the
-                list immediately, even offline. The readable text of articles you
+                <strong>Local storage on each device</strong> (an App Group
+                container on iOS; on a Mac, the app&rsquo;s preferences and its
+                folder in Application Support; or the browser&rsquo;s local
+                extension storage) so the app and any browser extension can read
+                and write to the list immediately, even offline. The readable text of articles you
                 save for offline reading is kept in a separate on-device cache on
                 the same device.
             </li>
@@ -196,7 +200,10 @@
             </li>
         </ol>
         <p>
-            The only network calls the app and extension make are to this cloud
+            Apart from two things described below &mdash; Apple&rsquo;s iCloud
+            Keychain carrying your sync key between your devices, and the Mac
+            app&rsquo;s check for updates &mdash; the only network calls the app
+            and extension make are to this cloud
             sync service, to push and pull your own saved list. The sync service
             in turn forwards the title and URL of saved links to Google&rsquo;s
             Gemini API for folder categorization, as described under &ldquo;AI
@@ -240,10 +247,82 @@
             </li>
         </ul>
 
-        <h2>Browser extension</h2>
+        <h2>Clipfile for Mac</h2>
         <p>
-            An optional Chromium browser extension (for Dia, Chrome, Edge, Arc,
-            Brave, etc.) is available separately. It stores the same fields
+            Clipfile for Mac is a menu-bar app, distributed as a notarised
+            download from outside the Mac App Store. It saves pages from
+            <strong>Safari, Chrome, Helium and Brave</strong> (and other
+            Chromium browsers that support AppleScript) without a browser
+            extension, as follows:
+        </p>
+        <ul>
+            <li>
+                <strong>Automation (Apple Events) permission.</strong> macOS asks
+                you once per browser whether Clipfile may control it. You can
+                withdraw this at any time in System Settings &rarr; Privacy &amp;
+                Security &rarr; Automation.
+            </li>
+            <li>
+                <strong>Only when you save.</strong> When you press the save
+                shortcut or choose Save Current Tab from the menu, Clipfile asks
+                the browser for the frontmost tab&rsquo;s URL, title and page
+                content (its source or text), in your own logged-in session. It
+                does not read other tabs, does not read pages you have not chosen
+                to save, and does nothing in the background. In Chromium browsers
+                the page is handed over as a temporary file, which Clipfile deletes
+                straight away, though the browser may list it in its download
+                history. If you have separately turned on your browser&rsquo;s
+                &ldquo;Allow JavaScript from Apple Events&rdquo; setting, Clipfile
+                may instead run its bundled reader script in that tab to extract
+                the article.
+            </li>
+            <li>
+                <strong>Processed on your Mac.</strong> The article text is
+                extracted on your Mac and stored as that item&rsquo;s offline
+                copy; before it is synced it is encrypted on your Mac exactly as
+                described above, so the relay stores only ciphertext.
+            </li>
+            <li>
+                <strong>Update check.</strong> Once a day the app checks for a new
+                version by fetching an update feed hosted on GitHub, and downloads
+                the update from GitHub if you choose to install it. This is an
+                ordinary web request that identifies the app and its version, as
+                any web request does; it carries no system profile and none of
+                your saved data. GitHub, like any web host, sees your IP address.
+            </li>
+        </ul>
+
+        <h2>Linking your devices</h2>
+        <ul>
+            <li>
+                <strong>iCloud Keychain.</strong> The iPhone, iPad and Mac apps
+                keep your sync key in your keychain, marked to sync, so that if
+                you use iCloud Keychain a new Apple device picks it up by itself.
+                That sync is performed by Apple, not by Clipfile or its relay, and
+                Apple describes iCloud Keychain as end-to-end encrypted. If iCloud
+                Keychain is off, the key stays on the device.
+            </li>
+            <li>
+                <strong>Pairing codes.</strong> For a device iCloud Keychain
+                can&rsquo;t reach, a device that already has your list can show a
+                pairing code. Doing so sends your sync key to the relay, which
+                holds it under that code for at most five minutes. The code is 8
+                characters and works once: entering it on the new device returns
+                the key and deletes it from the relay, and an unused code simply
+                expires. To limit guessing, failed attempts to use a code are
+                counted per IP address for about two minutes. Anyone who has a live
+                code can obtain your sync key, so treat it like the key itself.
+            </li>
+            <li>
+                You can also copy the sync key between devices by hand.
+            </li>
+        </ul>
+
+        <h2>Browser extensions (being retired)</h2>
+        <p>
+            The browser extensions are being retired and are no longer the way
+            to save on a Mac. For as long as it remains installable, the older
+            optional Chromium browser extension stores the same fields
             (URL, title, timestamps, read flag, deleted flag, notes) using the
             browser&rsquo;s local extension storage, and syncs them with the
             same cloud sync service described above. When you save an article
@@ -282,7 +361,9 @@
         <h2>Third parties</h2>
         <p>
             Clipfile does not use any third-party analytics, advertising,
-            crash-reporting, attribution, or tracking SDKs.
+            crash-reporting, attribution, or tracking SDKs. The Mac app includes
+            the open-source Sparkle framework solely to check for and install
+            updates, as described under &ldquo;Clipfile for Mac&rdquo; above.
         </p>
         <p>
             The one third party involved is <strong>Google</strong>, whose
@@ -293,7 +374,9 @@
             (never article text or any information about you), and under
             Google&rsquo;s paid API terms it is not used to train Google&rsquo;s
             models or for advertising. No other third party has access to your
-            data.
+            data. (GitHub hosts the Mac app&rsquo;s update feed and downloads but
+            receives none of your data, and Apple&rsquo;s iCloud Keychain carries
+            your sync key only between your own devices, as described above.)
         </p>
 
         <h2>Your control over your data</h2>
@@ -302,7 +385,7 @@
         </p>
         <ul>
             <li>Delete an individual saved item from within the app or extension at any time &mdash; the deletion syncs to your other devices.</li>
-            <li>Uninstall the app, which removes all locally stored data on that device.</li>
+            <li>Uninstall the app, which removes all locally stored data on that device. (On a Mac, moving the app to the Trash leaves its preferences and cached articles in your Library folder until you delete them.)</li>
             <li>
                 To request removal of your data from the cloud sync store,
                 contact the developer at the email address below.
